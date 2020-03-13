@@ -20,18 +20,18 @@ implementation 'com.lmxjw3.widget:clearscreen:1.0.0'
 
 ##### 2. API
 ```
-    // Add slide clear view
+    // Add swipe clear view
     addClearViews(View... views)
     
-    // Remove slide clear view
+    // Remove swipe clear view
     removeClearViews(View... views)
     
-    // Remove all slide clear views
+    // Remove all swipe clear views
     removeAllClearViews()
     
-    // Set slide direction（LEFT or RIGHT）
+    // Set swipe direction（LEFT or RIGHT）
     setSlideDirection(SlideDirection direction)
     
-    // Set slide listener
+    // Set swipe listener
     setOnSlideListener(OnSlideClearListener slideListener)
 ```
