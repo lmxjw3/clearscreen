@@ -194,8 +194,4 @@ public class ClearScreenLayout extends FrameLayout {
 
         void onRestored();
     }
-
-    public enum SlideDirection {
-        LEFT, RIGHT
-    }
 }

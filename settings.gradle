@@ -1,2 +1,2 @@
 include ':app', ':library'
-rootProject.name='ClearScreenApp'
+rootProject.name='clearscreen'
