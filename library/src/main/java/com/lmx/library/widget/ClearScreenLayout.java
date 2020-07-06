@@ -118,6 +118,58 @@ public class ClearScreenLayout extends FrameLayout {
         listClearViews.clear();
     }
 
+    /**
+     * 清屏（有动画）
+     */
+    public void clearWithAnim() {
+        if (ifCleared) {
+            return;
+        } else if (leftSlide) {
+            endX = -getWidth();
+        } else {
+            endX = getWidth();
+        }
+        mAnimator.start();
+    }
+
+    /**
+     * 清屏（无动画）
+     */
+    public void clearWithoutAnim() {
+        if (ifCleared) {
+            return;
+        } else if (leftSlide) {
+            endX = -getWidth();
+        } else {
+            endX = getWidth();
+        }
+        translateChild(endX);
+        ifCleared = true;
+    }
+
+    /**
+     * 还原（有动画）
+     */
+    public void restoreWithAnim() {
+        if (!ifCleared) {
+            return;
+        }
+        endX = 0;
+        mAnimator.start();
+    }
+
+    /**
+     * 还原（无动画）
+     */
+    public void restoreWithoutAnim() {
+        if (!ifCleared) {
+            return;
+        }
+        endX = 0;
+        translateChild(endX);
+        ifCleared = false;
+    }
+
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
         final int x = (int) event.getX();
