@@ -34,4 +34,13 @@ implementation 'com.lmxjw3.widget:clearscreen:1.1.0'
     
     // 设置滑动监听器
     setOnSlideListener(OnSlideClearListener slideListener)
+    
+    // 清屏（有动画）
+    clearWithAnim() 
+    // 清屏（无动画）
+    clearWithoutAnim() 
+    // 还原（有动画）
+    restoreWithAnim()
+    // 还原（无动画）
+    restoreWithoutAnim()
 ```

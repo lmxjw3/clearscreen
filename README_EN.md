@@ -34,4 +34,9 @@ implementation 'com.lmxjw3.widget:clearscreen:1.1.0'
     
     // Set swipe listener
     setOnSlideListener(OnSlideClearListener slideListener)
+    
+    clearWithAnim() 
+    clearWithoutAnim() 
+    restoreWithAnim()
+    restoreWithoutAnim()
 ```
