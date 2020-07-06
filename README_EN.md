@@ -10,7 +10,7 @@ Swipe left or right to clear screen controls
 
 ### Import
 ```
-implementation 'com.lmxjw3.widget:clearscreen:1.0.0'
+implementation 'com.lmxjw3.widget:clearscreen:1.1.0'
 ```
 
 
