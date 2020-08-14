@@ -35,7 +35,7 @@ publish {
     repoName = 'maven' // 仓库名
     groupId = 'com.lmxjw3.widget'
     artifactId = 'clearscreen'
-    publishVersion = '1.1.0'
+    publishVersion = '1.2.0'
     desc = '直播间左滑或右滑清屏控件'
     website = 'https://github.com/lmxjw3/clearscreen'
     dryRun = false
