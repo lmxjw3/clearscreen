@@ -1,6 +1,6 @@
 # clearscreen
 
-![](https://img.shields.io/badge/version-1.0.0-brightgreen.svg)&#160;
+![](https://img.shields.io/badge/version-1.2.0-brightgreen.svg)&#160;
 ![](https://img.shields.io/badge/license-Apache%202-blue.svg)
 
 [**English**](https://github.com/lmxjw3/clearscreen/blob/master/README_EN.md)
@@ -10,7 +10,7 @@
 
 ### Import
 ```
-implementation 'com.lmxjw3.widget:clearscreen:1.1.0'
+implementation 'com.lmxjw3.widget:clearscreen:1.2.0'
 ```
 
 

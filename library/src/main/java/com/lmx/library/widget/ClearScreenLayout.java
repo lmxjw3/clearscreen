@@ -171,6 +171,33 @@ public class ClearScreenLayout extends FrameLayout {
     }
 
     @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                mDownX = (int) event.getX();
+                mDownY = (int) event.getY();
+                getParent().requestDisallowInterceptTouchEvent(true);
+                break;
+            case MotionEvent.ACTION_MOVE:
+                int endX = (int) event.getX();
+                int endY = (int) event.getY();
+                int distanceX = Math.abs(endX - mDownX);
+                int distanceY = Math.abs(endY - mDownY);
+                if (distanceX >= distanceY) {
+                    getParent().requestDisallowInterceptTouchEvent(true);
+                } else {
+                    getParent().requestDisallowInterceptTouchEvent(false);
+                }
+                break;
+            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_CANCEL:
+                getParent().requestDisallowInterceptTouchEvent(false);
+                break;
+        }
+        return super.dispatchTouchEvent(event);
+    }
+
+    @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
         final int x = (int) event.getX();
         final int y = (int) event.getY();
