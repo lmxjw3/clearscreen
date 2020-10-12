@@ -172,88 +172,94 @@ public class ClearScreenLayout extends FrameLayout {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                mDownX = (int) event.getX();
-                mDownY = (int) event.getY();
-                getParent().requestDisallowInterceptTouchEvent(true);
-                break;
-            case MotionEvent.ACTION_MOVE:
-                int endX = (int) event.getX();
-                int endY = (int) event.getY();
-                int distanceX = Math.abs(endX - mDownX);
-                int distanceY = Math.abs(endY - mDownY);
-                if (distanceX >= distanceY) {
+        if (isEnabled()) {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    mDownX = (int) event.getX();
+                    mDownY = (int) event.getY();
                     getParent().requestDisallowInterceptTouchEvent(true);
-                } else {
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    int endX = (int) event.getX();
+                    int endY = (int) event.getY();
+                    int distanceX = Math.abs(endX - mDownX);
+                    int distanceY = Math.abs(endY - mDownY);
+                    if (distanceX >= distanceY) {
+                        getParent().requestDisallowInterceptTouchEvent(true);
+                    } else {
+                        getParent().requestDisallowInterceptTouchEvent(false);
+                    }
+                    break;
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL:
                     getParent().requestDisallowInterceptTouchEvent(false);
-                }
-                break;
-            case MotionEvent.ACTION_UP:
-            case MotionEvent.ACTION_CANCEL:
-                getParent().requestDisallowInterceptTouchEvent(false);
-                break;
+                    break;
+            }
         }
         return super.dispatchTouchEvent(event);
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
-        final int x = (int) event.getX();
-        final int y = (int) event.getY();
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                mDownX = x;
-                mDownY = y;
-                break;
-            case MotionEvent.ACTION_MOVE:
-                if (!mAnimator.isRunning() && Math.abs(x - mDownX) > Math.abs(y - mDownY)) {
-                    startX = translateX;
-                    if (x - mDownX < -10) {
-                        if ((leftSlide && !ifCleared) || (!leftSlide && ifCleared)) {
-                            return true;
-                        }
-                    } else if (x - mDownX > 10) {
-                        if ((leftSlide && ifCleared) || (!leftSlide && !ifCleared)) {
-                            return true;
+        if (isEnabled()) {
+            final int x = (int) event.getX();
+            final int y = (int) event.getY();
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    mDownX = x;
+                    mDownY = y;
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    if (!mAnimator.isRunning() && Math.abs(x - mDownX) > Math.abs(y - mDownY)) {
+                        startX = translateX;
+                        if (x - mDownX < -10) {
+                            if ((leftSlide && !ifCleared) || (!leftSlide && ifCleared)) {
+                                return true;
+                            }
+                        } else if (x - mDownX > 10) {
+                            if ((leftSlide && ifCleared) || (!leftSlide && !ifCleared)) {
+                                return true;
+                            }
                         }
                     }
-                }
-                break;
+                    break;
+            }
         }
         return super.onInterceptTouchEvent(event);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        mVelocityTracker.addMovement(event);
-        final int x = (int) event.getX();
-        final int offsetX = x - mDownX;
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_MOVE:
-                translateChild(startX + offsetX);
-                return true;
-            case MotionEvent.ACTION_UP:
-                if (translateX != 0) {
-                    mVelocityTracker.computeCurrentVelocity(10);
-                    if (Math.abs(offsetX) > getWidth() / 3 ||
-                            (mVelocityTracker.getXVelocity() > 20 && !leftSlide && !ifCleared) ||
-                            (mVelocityTracker.getXVelocity() > 20 && leftSlide && ifCleared) ||
-                            (mVelocityTracker.getXVelocity() < -20 && !leftSlide && ifCleared) ||
-                            (mVelocityTracker.getXVelocity() < -20 && leftSlide && !ifCleared)) {
-                        if (ifCleared) {
-                            endX = 0;
-                        } else if (leftSlide) {
-                            endX = -getWidth();
+        if (isEnabled()) {
+            mVelocityTracker.addMovement(event);
+            final int x = (int) event.getX();
+            final int offsetX = x - mDownX;
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_MOVE:
+                    translateChild(startX + offsetX);
+                    return true;
+                case MotionEvent.ACTION_UP:
+                    if (translateX != 0) {
+                        mVelocityTracker.computeCurrentVelocity(10);
+                        if (Math.abs(offsetX) > getWidth() / 3 ||
+                                (mVelocityTracker.getXVelocity() > 20 && !leftSlide && !ifCleared) ||
+                                (mVelocityTracker.getXVelocity() > 20 && leftSlide && ifCleared) ||
+                                (mVelocityTracker.getXVelocity() < -20 && !leftSlide && ifCleared) ||
+                                (mVelocityTracker.getXVelocity() < -20 && leftSlide && !ifCleared)) {
+                            if (ifCleared) {
+                                endX = 0;
+                            } else if (leftSlide) {
+                                endX = -getWidth();
+                            } else {
+                                endX = getWidth();
+                            }
                         } else {
-                            endX = getWidth();
+                            endX = startX;
                         }
-                    } else {
-                        endX = startX;
                     }
-                }
-                mAnimator.start();
-                return true;
+                    mAnimator.start();
+                    return true;
+            }
         }
         return super.onTouchEvent(event);
     }
