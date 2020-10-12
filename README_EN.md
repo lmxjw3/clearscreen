@@ -1,6 +1,6 @@
 # clearscreen
 
-![](https://img.shields.io/badge/version-1.2.0-brightgreen.svg)&#160;
+![](https://img.shields.io/badge/version-1.2.1-brightgreen.svg)&#160;
 ![](https://img.shields.io/badge/license-Apache%202-blue.svg)
 
 [**中文版**](https://github.com/lmxjw3/clearscreen/blob/master/README.md)
@@ -10,7 +10,7 @@ Swipe left or right to clear screen controls
 
 ### Import
 ```
-implementation 'com.lmxjw3.widget:clearscreen:1.2.0'
+implementation 'com.lmxjw3.widget:clearscreen:1.2.1'
 ```
 
 
@@ -34,6 +34,9 @@ implementation 'com.lmxjw3.widget:clearscreen:1.2.0'
     
     // Set swipe listener
     setOnSlideListener(OnSlideClearListener slideListener)
+
+    // Enabled swipe
+    setEnabled(boolean enable)
     
     clearWithAnim() 
     clearWithoutAnim() 

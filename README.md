@@ -1,6 +1,6 @@
 # clearscreen
 
-![](https://img.shields.io/badge/version-1.2.0-brightgreen.svg)&#160;
+![](https://img.shields.io/badge/version-1.2.1-brightgreen.svg)&#160;
 ![](https://img.shields.io/badge/license-Apache%202-blue.svg)
 
 [**English**](https://github.com/lmxjw3/clearscreen/blob/master/README_EN.md)
@@ -10,7 +10,7 @@
 
 ### Import
 ```
-implementation 'com.lmxjw3.widget:clearscreen:1.2.0'
+implementation 'com.lmxjw3.widget:clearscreen:1.2.1'
 ```
 
 
@@ -34,6 +34,9 @@ implementation 'com.lmxjw3.widget:clearscreen:1.2.0'
     
     // 设置滑动监听器
     setOnSlideListener(OnSlideClearListener slideListener)
+
+    // 滑动开关
+    setEnabled(boolean enable)
     
     // 清屏（有动画）
     clearWithAnim() 
